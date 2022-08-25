@@ -5,6 +5,7 @@ from time import time, sleep, mktime
 from datetime import date, datetime
 import random
 import os
+import sys
 
 
 class Annoyer(object):
@@ -47,16 +48,23 @@ class Annoyer(object):
 			wl.write(f'\n{datetime.now()}: {WARNING}')
 
 
-hold = 60*random.uniform(0, 120)
-#sleep(hold)
+if __name__ == '__main__':
+    # date should be passed in the following way:
+    # python3 THIS_SCRIPT_NAME YEAR MONTH DAY
+    if len(sys.argv) != 4:
+        raise Exception("Wrong argument format!\n\tPass th date of exams as 3 args:\n\tYEAR MONTH DAY")
+    exams_date = date(*[int(i) for i in sys.argv[1:4]])
 
-deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
-time_left = deadline - time()
+    hold = 60*random.uniform(0, 120)
+    #sleep(hold)
 
-if time_left < 0:
-	WARNING = "wszyscy zginiemy!"
-	os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
-	exit()
+    deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
+    time_left = deadline - time()
 
-session = Annoyer(time_left)
-session.anoy()
+    if time_left < 0:
+	    WARNING = "wszyscy zginiemy!"
+	    os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
+	    exit()
+
+    session = Annoyer(time_left)
+    session.anoy()
