@@ -11,27 +11,24 @@ import sys
 JOKES_PATH = os.path.dirname(os.path.realpath(__file__)) + "/zarty.txt"
 
 
-class Annoyer(object):
-        zarty: list
-        number: int
+class JokesAnnoyer(object):
+        jokes: list
 
         def __init__(self, jokes_path):
             self.load_jokes(jokes_path)
         
         def load_jokes(self, path) -> None:
             with open(path, "r") as f:
-                selt.zarty = f.readlines()
-            self.number = len(self.zarty)
-            return None
+                selt.jokes = f.readlines()
 
-        def losuj(self, number):
-            return random.choice(self.zarty)
+        def pick_joke(self) -> str:
+            return random.choice(self.jokes)
 
-        def anoy(self):
-            WARNING =self.losuj(1)
-            os.system("espeak -s100 -a100 -v pl -k40 " + WARNING)
+        def anoy(self) -> None:
+            CHOSEN_JOKE = self.pick_joke()
+            os.system("espeak -s100 -a100 -v pl -k40 " + CHOSEN_JOKE)
             with open('wkurwiaczlog.txt', 'a') as wl:
-                wl.write(f'\n{datetime.now()}: {WARNING}')
+                wl.write(f'\n{datetime.now()}: {CHOSEN_JOKE}')
 
 
 if __name__ == '__main__':
@@ -52,5 +49,5 @@ if __name__ == '__main__':
 	    os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
 	    exit()
 
-    session = Annoyer(JOKES_PATH)
+    session = JokesAnnoyer(JOKES_PATH)
     session.anoy()
