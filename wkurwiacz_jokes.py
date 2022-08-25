@@ -5,6 +5,7 @@ from time import time, sleep, mktime
 from datetime import date, datetime
 import random
 import os
+import sys
 
 # consts
 JOKES_PATH = "zarty.txt"
@@ -34,10 +35,16 @@ class Annoyer(object):
 
 
 if __name__ == '__main__':
+    # date should be passed in the following way:
+    # python3 THIS_SCRIPT_NAME YEAR MONTH DAY
+    if len(sys.argv) != 4:
+        raise Exception("Wrong argument format!\n\tPass th date of exams as 3 args:\n\tYEAR MONTH DAY")
+    exams_date = date(*[int(i) for i in sys.argv[1:4]])
+
     hold = 60*random.uniform(0, 120)
     sleep(hold)
 
-    deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
+    deadline = mktime(exams_date.timetuple()) + 8*60*60
     time_left = deadline - time()
 
     if time_left < 0:
