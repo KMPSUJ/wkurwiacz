@@ -33,16 +33,17 @@ class Annoyer(object):
                 wl.write(f'\n{datetime.now()}: {WARNING}')
 
 
-hold = 60*random.uniform(0, 120)
-sleep(hold)
+if __name__ == '__main__':
+    hold = 60*random.uniform(0, 120)
+    sleep(hold)
 
-deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
-time_left = deadline - time()
+    deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
+    time_left = deadline - time()
 
-if time_left < 0:
-	WARNING = "wszyscy zginiemy!"
-	os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
-	exit()
+    if time_left < 0:
+	    WARNING = "wszyscy zginiemy!"
+	    os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
+	    exit()
 
-session = Annoyer(JOKES_PATH)
-session.anoy()
+    session = Annoyer(JOKES_PATH)
+    session.anoy()
