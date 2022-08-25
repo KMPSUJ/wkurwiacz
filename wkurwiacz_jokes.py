@@ -6,14 +6,23 @@ from datetime import date, datetime
 import random
 import os
 
+# consts
+JOKES_PATH = "zarty.txt"
+
 
 class Annoyer(object):
-        def __init__(self, seconds):
-            self.number=4
-            self.zarty=["'Kiedy ktoś opowie hamski żart przy stole. '",
-                    "'Jak nazywa się moment przed zjedzeniem bułki? Preambuła. Hahahaha'",
-                    "'Wiesz dlaczego nóż poszedł do piekła? Bo został potępiony.'",
-                    "'Co robi koala w płonącym lesie? Płonie.'"]
+        zarty: list
+        number: int
+
+        def __init__(self, jokes_path):
+            self.load_jokes(jokes_path)
+        
+        def load_jokes(self, path) -> None:
+            with open(path, "r") as f:
+                selt.zarty = f.readlines()
+            self.number = len(self.zarty)
+            return None
+
         def losuj(self, number):
             return random.choice(self.zarty)
 
@@ -35,5 +44,5 @@ if time_left < 0:
 	os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
 	exit()
 
-session = Annoyer(time_left)
+session = Annoyer(JOKES_PATH)
 session.anoy()
