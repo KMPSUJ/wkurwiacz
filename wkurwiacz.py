@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from time import time, sleep, mktime
-from datetime import date
+from datetime import date, datetime
 import random
 import os
 
@@ -43,12 +43,14 @@ class Annoyer(object):
 		        + "i " + self.dwojkopoprawiacz(self.minutes) + " minut" + self.mh_end(self.minutes) \
 		        + ". Ruszcie się wy nieroby!'"
 		os.system("espeak -s100 -a100 -v pl -k40 " + WARNING)
+		with open('wkurwiaczlog.txt', 'a') as wl:
+			wl.write(f'\n{datetime.now()}: {WARNING}')
 
 
 hold = 60*random.uniform(0, 120)
-sleep(hold)
+#sleep(hold)
 
-deadline = mktime(date(2020, 1, 29).timetuple()) + 8*60*60
+deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
 time_left = deadline - time()
 
 if time_left < 0:
