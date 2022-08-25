@@ -8,7 +8,7 @@ import os
 import sys
 
 # consts
-JOKES_PATH = "zarty.txt"
+JOKES_PATH = os.path.dirname(os.path.realpath(__file__)) + "/zarty.txt"
 
 
 class Annoyer(object):
