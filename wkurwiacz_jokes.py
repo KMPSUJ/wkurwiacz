@@ -39,7 +39,7 @@ if __name__ == '__main__':
     exams_date = datetime(*[int(i) for i in sys.argv[1:4]],8)
 
     hold = 60*random.uniform(0, 120)
-    # sleep(hold)
+    sleep(hold)
 
     deadline = mktime(exams_date.timetuple())
     time_left = deadline - time()
