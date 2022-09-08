@@ -33,6 +33,10 @@ class Annoyer(object):
 			return "dni, "
 
 	def dwojkopoprawiacz(self, number):
+		if number == 1:
+			return "jedna"
+		if number == 2:
+			return "dwie"
 		if number%10 == 2 and number != 12:
 			return str(number-2) + " dwie"
 		else:
@@ -52,19 +56,19 @@ if __name__ == '__main__':
     # date should be passed in the following way:
     # python3 THIS_SCRIPT_NAME YEAR MONTH DAY
     if len(sys.argv) != 4:
-        raise Exception("Wrong argument format!\n\tPass th date of exams as 3 args:\n\tYEAR MONTH DAY")
-    exams_date = date(*[int(i) for i in sys.argv[1:4]])
+        raise Exception("Wrong argument format!\n\tPass the date of exams as 3 args:\n\tYEAR MONTH DAY")
+    exams_date = datetime(*[int(i) for i in sys.argv[1:4]],8)
 
     hold = 60*random.uniform(0, 120)
     #sleep(hold)
 
-    deadline = mktime(date(2022, 6, 17).timetuple()) + 8*60*60
+    deadline = mktime(exams_date.timetuple())
     time_left = deadline - time()
 
     if time_left < 0:
 	    WARNING = "wszyscy zginiemy!"
-	    os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
-	    exit()
+	    os.system("espeak -s100 -a100 -v pl -k40 '" + WARNING + "'")
+	    sys.exit()
 
     session = Annoyer(time_left)
     session.anoy()
