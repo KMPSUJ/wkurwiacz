@@ -19,7 +19,7 @@ class JokesAnnoyer(object):
         
         def load_jokes(self, path) -> None:
             with open(path, "r") as f:
-                selt.jokes = f.readlines()
+                self.jokes = f.readlines()
 
         def pick_joke(self) -> str:
             return random.choice(self.jokes)
@@ -35,19 +35,19 @@ if __name__ == '__main__':
     # date should be passed in the following way:
     # python3 THIS_SCRIPT_NAME YEAR MONTH DAY
     if len(sys.argv) != 4:
-        raise Exception("Wrong argument format!\n\tPass th date of exams as 3 args:\n\tYEAR MONTH DAY")
-    exams_date = date(*[int(i) for i in sys.argv[1:4]])
+        raise Exception("Wrong argument format!\n\tPass the date of exams as 3 args:\n\tYEAR MONTH DAY")
+    exams_date = datetime(*[int(i) for i in sys.argv[1:4]],8)
 
     hold = 60*random.uniform(0, 120)
-    sleep(hold)
+    # sleep(hold)
 
-    deadline = mktime(exams_date.timetuple()) + 8*60*60
+    deadline = mktime(exams_date.timetuple())
     time_left = deadline - time()
 
     if time_left < 0:
 	    WARNING = "wszyscy zginiemy!"
-	    os.system("'espeak -s100 -a100 -v pl -k40 " + WARNING + "'")
-	    exit()
+	    os.system("espeak -s100 -a100 -v pl -k40 '" + WARNING + "'")
+	    sys.exit()
 
     session = JokesAnnoyer(JOKES_PATH)
     session.anoy()
