@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from time import time, sleep, mktime
-from datetime import date, datetime
+from datetime import datetime, timedelta
 import random
 import os
 import sys
+from scrap_date import next_session_date
 
 
 class Annoyer(object):
@@ -55,9 +56,12 @@ class Annoyer(object):
 if __name__ == '__main__':
     # date should be passed in the following way:
     # python3 THIS_SCRIPT_NAME YEAR MONTH DAY
-    if len(sys.argv) != 4:
+    if len(sys.argv) == 1:
+        exams_date = next_session_date()
+    elif len(sys.argv) != 4:
         raise Exception("Wrong argument format!\n\tPass the date of exams as 3 args:\n\tYEAR MONTH DAY")
-    exams_date = datetime(*[int(i) for i in sys.argv[1:4]],8)
+    else:
+        exams_date = datetime(*[int(i) for i in sys.argv[1:4]],8)
 
     hold = 60*random.uniform(0, 120)
     sleep(hold)
@@ -70,5 +74,6 @@ if __name__ == '__main__':
 	    os.system("espeak -s100 -a100 -v pl -k40 '" + WARNING + "'")
 	    sys.exit()
 
-    session = Annoyer(time_left)
-    session.anoy()
+    if time_left < timedelta(21).total_seconds():
+        session = Annoyer(time_left)
+        session.anoy()
