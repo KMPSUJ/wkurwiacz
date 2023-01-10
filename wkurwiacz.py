@@ -59,7 +59,7 @@ if __name__ == '__main__':
         raise Exception("Wrong argument format!\n\tPass the date of exams as 3 args:\n\tYEAR MONTH DAY")
     exams_date = datetime(*[int(i) for i in sys.argv[1:4]],8)
 
-    hold = 60*random.uniform(0, 120)
+    hold = 60*random.uniform(0, 3)
     sleep(hold)
 
     deadline = mktime(exams_date.timetuple())
