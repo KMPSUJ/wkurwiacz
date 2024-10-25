@@ -80,3 +80,4 @@
 'Jaki góral najwięcej knuje? Góral spiski'
 'Jak witają się wietrznego dnia ludzie co wczoraj pili? Cześć, wieje'
 'Co robi mocz sepleniącego psa na drzewie? Ścieka'
+'Jaki mały zbiornik wodny tłumaczy grawitację i elektromagnetyzm? Klain-Kałuża'
